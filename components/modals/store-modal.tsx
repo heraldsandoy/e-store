@@ -12,17 +12,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-
-
 const formSchema = z.object({
   name: z.string().min(1)
 })
 
 export const StoreModal = () => {
   const storeModal = useStoreModal()
-
   const [loading, setLoading] = useState(false)
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,8 +32,12 @@ export const StoreModal = () => {
 
       const response = await axios.post("/api/stores", values)
 
-      toast.success("Store created.")
+      if(response) {
+        window.location.assign(`/${response.data.id}`)
+      }
+    
     } catch(error) {
+      console.log(error)
       toast.error("Something went wrong.")
     } finally {
       setLoading(false)

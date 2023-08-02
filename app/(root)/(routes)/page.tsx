@@ -1,4 +1,3 @@
-
 "use client"
 import { useEffect } from "react"
 
@@ -15,9 +14,5 @@ export default function SetupPage() {
     }
   }, [isOpen, onOpen])
 
-  return (
-    <div className="p-4" >
-
-    </div>
-  )
+  return null
 }
